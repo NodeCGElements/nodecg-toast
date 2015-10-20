@@ -1,6 +1,12 @@
-<link rel="import" href="../components/polymer/polymer.html">
+<link rel="import" href="../polymer/polymer.html">
 
 <dom-module id="nodecg-toast">
+    <style>
+        :host {
+            display: none;
+        }
+    </style>
+
     <template>
         <content id="content"></content>
     </template>
@@ -32,12 +38,6 @@
             // Set up content observer and toaster.
             ready: function() {
                 var topDoc = window.top.document;
-
-                if (typeof topDoc.PaperToast === 'undefined') {
-                    throw new Error('The "paper-toast" element does not appear to be loaded on the dashboard.' +
-                            ' Aborting.');
-                }
-
                 this.toaster = topDoc.createElement('paper-toast');
                 this.toaster.duration = this.duration;
                 this.toaster.text = this.text;
