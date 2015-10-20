@@ -1,0 +1,29 @@
+{
+  "name": "nodecg-toast",
+  "homepage": "https://github.com/NodeCGElements/nodecg-toast",
+  "authors": [
+    "Alex Van Camp <email@alexvan.camp>"
+  ],
+  "description": "An implementation of paper-toast designed to work well in NodeCG dashboard panels.",
+  "main": "nodecg-toast.html",
+  "moduleType": [],
+  "keywords": [
+    "nodecg",
+    "dashboard",
+    "panel",
+    "element",
+    "polymer",
+    "component"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "~1.1.5"
+  }
+}
