@@ -24,7 +24,8 @@
     "tests"
   ],
   "dependencies": {
-    "polymer": "~1.1.5"
+    "polymer": "~1.1.5",
+    "iron-component-page": "PolymerElements/iron-component-page#~1.0.8"
   },
   "version": "0.1.0"
 }
