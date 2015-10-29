@@ -26,5 +26,5 @@
   "dependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.8"
   },
-  "version": "0.1.0"
+  "version": "0.1.1"
 }
