@@ -19,78 +19,100 @@ takes care of this for you and makes it transparent.
     <template>
         <content id="contentNode"></content>
     </template>
-
-    <script>
-        Polymer({
-            is: 'nodecg-toast',
-
-            properties: {
-                /**
-                 * The duration in milliseconds to show the toast.
-                 */
-                duration: {
-                    type: Number,
-                    value: 3000,
-                    observer: '_durationChanged'
-                },
-
-                /**
-                 * The text to display in the toast.
-                 */
-                text: {
-                    type: String,
-                    value: '',
-                    observer: '_textChanged'
-                }
-            },
-
-            // Set up content observer and toaster.
-            ready: function() {
-                var topDoc = window.top.document;
-                this.toaster = topDoc.createElement('paper-toast');
-                this.toaster.duration = this.duration;
-                this.toaster.text = this.text;
-                topDoc.body.appendChild(this.toaster);
-                this._observer = Polymer.dom(this.$.contentNode).observeNodes(this._contentChanged);
-            },
-
-            /**
-             * Show the toast.
-             * @method show
-             */
-            show: function() {
-                this.toaster.show();
-            },
-
-            /**
-             * Hide the toast
-             */
-            hide: function() {
-                this.toaster.hide();
-            },
-
-            _durationChanged: function() {
-                if (!this.toaster) return;
-                this.toaster.duration = this.duration;
-            },
-
-            _textChanged: function() {
-                if (!this.toaster) return;
-                this.toaster.text = this.text;
-            },
-
-            _contentChanged: function() {
-                // Remove any existing content from the toaster.
-                while (this.toaster.firstChild) {
-                    this.toaster.removeChild(this.toaster.firstChild);
-                }
-
-                // Clone the current content in the toaster.
-                var distributedNodes = Polymer.dom(this.$.contentNode).getDistributedNodes();
-                distributedNodes.forEach(function(node) {
-                    Polymer.dom(this.toster).appendChild(node.cloneNode(true));
-                }.bind(this));
-            }
-        })
-    </script>
 </dom-module>
+
+<script>
+(function() {
+    /* If a single panel is reloaded by right clicking on it and hitting "Reload frame",
+     * it will attach duplicate paper-toast nodes to the top DOM. This block finds those
+     * old paper-toast nodes and removes them.
+     */
+    var topDoc = window.top.document;
+    var now = Date.now();
+    var pathname = window.location.pathname;
+    var oldNodes = topDoc.querySelectorAll('paper-toast[pathname="' + pathname + '"]' +
+            ':not([timestamp="' + now + '"])');
+    for (var i = 0; i < oldNodes.length; i++) {
+        topDoc.body.removeChild(oldNodes[i]);
+    }
+
+
+    Polymer({
+        is: 'nodecg-toast',
+
+        properties: {
+            /**
+             * The duration in milliseconds to show the toast.
+             */
+            duration: {
+                type: Number,
+                value: 3000,
+                observer: '_durationChanged'
+            },
+
+            /**
+             * The text to display in the toast.
+             */
+            text: {
+                type: String,
+                value: '',
+                observer: '_textChanged'
+            }
+        },
+
+        // Set up content observer and toaster.
+        attached: function() {
+            this.toaster = topDoc.createElement('paper-toast');
+            this.toaster.setAttribute('pathname', pathname);
+            this.toaster.setAttribute('timestamp', now);
+            this.toaster.duration = this.duration;
+            this.toaster.text = this.text;
+            this._observer = Polymer.dom(this.$.contentNode).observeNodes(this._contentChanged);
+            topDoc.body.appendChild(this.toaster);
+        },
+
+        detached: function() {
+            console.log('removing toaster');
+            window.top.document.body.removeChild(this.toaster);
+        },
+
+        /**
+         * Show the toast.
+         * @method show
+         */
+        show: function() {
+            this.toaster.show();
+        },
+
+        /**
+         * Hide the toast
+         */
+        hide: function() {
+            this.toaster.hide();
+        },
+
+        _durationChanged: function() {
+            if (!this.toaster) return;
+            this.toaster.duration = this.duration;
+        },
+
+        _textChanged: function() {
+            if (!this.toaster) return;
+            this.toaster.text = this.text;
+        },
+
+        _contentChanged: function() {
+            // Remove any existing content from the toaster.
+            while (this.toaster.firstChild) {
+                this.toaster.removeChild(this.toaster.firstChild);
+            }
+
+            // Clone the current content in the toaster.
+            var distributedNodes = Polymer.dom(this.$.contentNode).getDistributedNodes();
+            distributedNodes.forEach(function(node) {
+                Polymer.dom(this.toster).appendChild(node.cloneNode(true));
+            }.bind(this));
+        }
+    });
+})();
+</script>
