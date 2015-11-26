@@ -17,7 +17,7 @@ takes care of this for you and makes it transparent.
     </style>
 
     <template>
-        <content id="content"></content>
+        <content id="contentNode"></content>
     </template>
 
     <script>
@@ -51,9 +51,7 @@ takes care of this for you and makes it transparent.
                 this.toaster.duration = this.duration;
                 this.toaster.text = this.text;
                 topDoc.body.appendChild(this.toaster);
-
-                var observer = new MutationObserver(this._contentChanged.bind(this));
-                observer.observe(this.$.content, {childList: true, subtree: true, characterData: true});
+                this._observer = Polymer.dom(this.$.contentNode).observeNodes(this._contentChanged);
             },
 
             /**
@@ -82,18 +80,16 @@ takes care of this for you and makes it transparent.
             },
 
             _contentChanged: function() {
-                var self = this;
-
                 // Remove any existing content from the toaster.
                 while (this.toaster.firstChild) {
                     this.toaster.removeChild(this.toaster.firstChild);
                 }
 
                 // Clone the current content in the toaster.
-                var distributedNodes = Polymer.dom(this.$.content).getDistributedNodes();
+                var distributedNodes = Polymer.dom(this.$.contentNode).getDistributedNodes();
                 distributedNodes.forEach(function(node) {
-                    Polymer.dom(self.toster).appendChild(node.cloneNode(true));
-                });
+                    Polymer.dom(this.toster).appendChild(node.cloneNode(true));
+                }.bind(this));
             }
         })
     </script>
