@@ -82,14 +82,14 @@ takes care of this for you and makes it transparent.
          * @method show
          */
         show: function() {
-            this.toaster.show();
+            this.toaster.show.apply(this.toaster, arguments);
         },
 
         /**
          * Hide the toast
          */
         hide: function() {
-            this.toaster.hide();
+            this.toaster.hide.apply(this.toaster, arguments);
         },
 
         _durationChanged: function() {
