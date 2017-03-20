@@ -1,0 +1,23 @@
+{
+	"extends": "xo/esnext",
+	"env": {
+		"node": false,
+		"browser": true
+	},
+	"globals": {
+		"Polymer": true
+	},
+	"plugins": [
+		"html"
+	],
+	"rules": {
+		"new-cap": [
+			2,
+			{
+				"capIsNewExceptions": [
+					"Polymer"
+				]
+			}
+		]
+	}
+}
