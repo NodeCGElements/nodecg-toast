@@ -42,15 +42,15 @@ takes care of this for you and makes it transparent.
 				let parent = window.parent;
 				while (parent) {
 					if (parent.__nodecg__) {
-						return parent;
+						return parent.document;
 					}
 
 					parent = parent.parent;
 				}
 
-				return window;
+				return window.document;
 			} catch (e) {
-				return window;
+				return window.document;
 			}
 		}
 
