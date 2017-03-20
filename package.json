@@ -1,0 +1,25 @@
+{
+  "name": "nodecg-toast",
+  "version": "0.1.3",
+  "description": "An implementation of paper-toast designed to work well in NodeCG dashboard panels.",
+  "main": "nodecg-toast.html",
+  "scripts": {
+    "test": "npm run static",
+    "static": "eslint **.js **.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NodeCGElements/nodecg-toast.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/NodeCGElements/nodecg-toast/issues"
+  },
+  "homepage": "https://github.com/NodeCGElements/nodecg-toast#readme",
+  "devDependencies": {
+    "eslint": "^3.18.0",
+    "eslint-config-xo": "^0.18.1",
+    "eslint-plugin-html": "^2.0.1"
+  }
+}
