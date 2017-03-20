@@ -22,24 +22,8 @@ bower install --save NodeCGElements/nodecg-toast
 ```
 
 ## Usage
-
-<!--
-```
-<custom-element-demo>
-  <template>
-    <link rel="import" href="nodecg-toast.html">
-    <link rel="import" href="../paper-toast/paper-toast.html">
-    <script>window.__nodecg__ = true;</script>
-    <iframe>
-        <next-code-block></next-code-block>
-    </iframe>
-  </template>
-</custom-element-demo>
-```
--->
 ```html
-<paper-button raised onclick="toast0.open()">Default toast</paper-button>
-<nodecg-toast id="toast0" text="Look at me!"></nodecg-toast>
+<nodecg-toast text="Look at me!"></nodecg-toast>
 ```
 
 For more detailed documentation, refer to [paper-toast](https://www.webcomponents.org/element/PolymerElements/paper-toast).
