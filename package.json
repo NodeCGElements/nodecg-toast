@@ -1,6 +1,6 @@
 {
   "name": "nodecg-toast",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "An implementation of paper-toast designed to work well in NodeCG dashboard panels.",
   "main": "nodecg-toast.html",
   "scripts": {

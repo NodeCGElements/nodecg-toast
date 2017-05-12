@@ -1,3 +1,18 @@
+<a name="0.2.2"></a>
+## [0.2.2](https://github.com/NodeCGElements/nodecg-toast/compare/v0.2.1...v0.2.2) (2017-05-12)
+
+
+### Bug Fixes
+
+* fix case where paper-toast could be attached to the wrong document ([3de8f11](https://github.com/NodeCGElements/nodecg-toast/commit/3de8f11))
+
+
+### Features
+
+* add support for "standalone" panels ([cdd6684](https://github.com/NodeCGElements/nodecg-toast/commit/cdd6684))
+
+
+
 <a name="0.2.1"></a>
 ## [0.2.1](https://github.com/NodeCGElements/nodecg-toast/compare/v0.2.0...v0.2.1) (2017-05-12)
 
