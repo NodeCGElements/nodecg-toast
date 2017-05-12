@@ -41,7 +41,7 @@ takes care of this for you and makes it transparent.
 			try {
 				let parent = window.parent;
 				while (parent) {
-					if (parent.__nodecg__) {
+					if (parent.__nodecg__ || parent === parent.parent) {
 						return parent.document;
 					}
 
