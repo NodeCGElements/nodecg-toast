@@ -14,15 +14,15 @@
 	function findDashboardDoc() {
 		try {
 			let parent = window.parent;
-			while (parent) {
-				if (parent.__nodecg__ || parent === parent.parent) {
+			while (parent && parent !== parent.parent) {
+				if (parent.__nodecg__) {
 					return parent.document;
 				}
 
 				parent = parent.parent;
 			}
 
-			return window.document;
+			return parent.document;
 		} catch (e) {
 			return window.document;
 		}
