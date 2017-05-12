@@ -1,4 +1,7 @@
 (function () {
+	const urlParams = new URLSearchParams(window.location.search);
+	const IS_STANDALONE = urlParams.get('standalone') === 'true';
+
 	/* If a single panel is reloaded by right clicking on it and hitting "Reload frame",
 	 * it will attach duplicate paper-toast nodes to the top DOM. This block finds those
 	 * old paper-toast nodes and removes them.
@@ -28,6 +31,8 @@
 		}
 	}
 
+	let bootstrapped = false;
+
 	Polymer({
 		is: 'nodecg-toast',
 
@@ -48,6 +53,13 @@
 				type: String,
 				value: '',
 				observer: '_textChanged'
+			}
+		},
+
+		ready() {
+			if (!bootstrapped && IS_STANDALONE) {
+				bootstrapped = true;
+				this.importHref(this.resolveUrl('../paper-toast/paper-toast.html'));
 			}
 		},
 
