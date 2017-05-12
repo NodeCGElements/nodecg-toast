@@ -1,3 +1,13 @@
+<a name="0.2.1"></a>
+## [0.2.1](https://github.com/NodeCGElements/nodecg-toast/compare/v0.2.0...v0.2.1) (2017-05-12)
+
+
+### Bug Fixes
+
+* fix infinite loop when used on standalone panels ([84e6a62](https://github.com/NodeCGElements/nodecg-toast/commit/84e6a62))
+
+
+
 <a name="0.2.0"></a>
 # [0.2.0](https://github.com/NodeCGElements/nodecg-toast/compare/v0.1.3...v0.2.0) (2017-03-20)
 
