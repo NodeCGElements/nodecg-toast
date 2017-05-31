@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+	<title>nodecg-toast test</title>
+
+	<script src="../../webcomponentsjs/webcomponents-loader.js"></script>
+	<script src="../../web-component-tester/browser.js"></script>
+	<script>
+		window.__nodecg__ = true;
+	</script>
+
+	<link rel="import" href="../../polymer/lib/utils/flush.html">
+	<link rel="import" href="../nodecg-toast.html">
+</head>
+<body>
+	<test-fixture id="nodecg-toast">
+		<template>
+			<nodecg-toast></nodecg-toast>
+		</template>
+	</test-fixture>
+
+	<test-fixture id="iframe nodecg-toast">
+		<template>
+			<iframe src="fixtures/iframe_toast.html"></iframe>
+		</template>
+	</test-fixture>
+
+	<script>
+		/* eslint-env mocha */
+		/* global fixture assert sinon NodecgToast */
+		const importHrefSpy = sinon.spy(Polymer, 'importHref');
+		suite('nodecg-toast', () => {
+			let nodecgToast;
+			let shadowRoot; // eslint-disable-line no-unused-vars
+
+			setup(done => {
+				nodecgToast = fixture('nodecg-toast');
+				shadowRoot = nodecgToast.shadowRoot;
+				Polymer.flush();
+				if (NodecgToast.paperToastImported) {
+					done();
+				} else {
+					nodecgToast.addEventListener('paper-toast-imported', () => {
+						done();
+					});
+				}
+			});
+
+			test('imports paper toast when in the top document', () => {
+				assert.isTrue(importHrefSpy.calledOnce);
+				assert.equal(importHrefSpy.firstCall.args.length, 2);
+				assert.isTrue(importHrefSpy.firstCall.args[0].endsWith('/components/paper-toast/paper-toast.html'));
+				Polymer.importHref.restore();
+			});
+
+			test('toaster creation', () => {
+				assert.isOk(nodecgToast.toaster, 'toaster exists');
+				assert.equal(nodecgToast.toaster.is, 'paper-toast', 'toaster is a paper-toast element');
+				assert.equal(nodecgToast.toaster.getAttribute('pathname'),
+					'/components/nodecg-toast/test/nodecg-toast_test.html', 'toaster has the correct pathname');
+				assert.isNotNull(nodecgToast.toaster.getAttribute('timestamp'), 'toaster has a creation timestamp');
+			});
+
+			test('toaster creation', () => {
+				assert.isOk(nodecgToast.toaster, 'toaster exists');
+				assert.equal(nodecgToast.toaster.is, 'paper-toast', 'toaster is a paper-toast element');
+				assert.equal(nodecgToast.toaster.getAttribute('pathname'),
+					'/components/nodecg-toast/test/nodecg-toast_test.html', 'toaster has the correct pathname');
+				assert.isNotNull(nodecgToast.toaster.getAttribute('timestamp'), 'toaster has a creation timestamp');
+			});
+
+			test('method forwarding', () => {
+				NodecgToast.forwardedMethods.forEach(methodName => {
+					const stub = sinon.stub(nodecgToast.toaster, methodName);
+					nodecgToast[methodName]();
+					assert.isTrue(stub.calledOnce, `${methodName} is forwarded`);
+					stub.restore();
+				});
+			});
+
+			test('attribute forwarding', () => {
+				nodecgToast.text = 'foo';
+				nodecgToast.duration = 5432;
+				assert.equal(nodecgToast.text, nodecgToast.toaster.text);
+				assert.equal(nodecgToast.duration, nodecgToast.toaster.duration);
+			});
+
+			test('content forwarding', () => {
+				const span = document.createElement('span');
+				span.textContent = 'foo';
+				nodecgToast.appendChild(span);
+				nodecgToast._observer.flush();
+				assert.equal(nodecgToast.toaster.innerHTML, '<span>foo</span>');
+
+				nodecgToast.innerHTML = '<div>bar</div>';
+				nodecgToast._observer.flush();
+				assert.equal(nodecgToast.toaster.innerHTML, '<div>bar</div>');
+			});
+
+			// Disabled until test works when invoked via the wct command
+			test.skip('removal of old paper-toasts', done => {
+				let count = 0;
+				let firstTimestamp;
+				const iframe = fixture('iframe nodecg-toast');
+				iframe.addEventListener('load', () => {
+					const paperToasts = Array.from(document.querySelectorAll('paper-toast'));
+					const toastsFromIframe = paperToasts.filter(toast => {
+						return toast.getAttribute('pathname') === '/components/nodecg-toast/test/fixtures/iframe_toast.html';
+					});
+
+					if (count === 0) {
+						assert.lengthOf(toastsFromIframe, 1);
+						firstTimestamp = toastsFromIframe[0].getAttribute('timestamp');
+						iframe.contentWindow.location.reload();
+					} else if (count === 1) {
+						assert.lengthOf(toastsFromIframe, 1);
+						assert.notEqual(firstTimestamp, toastsFromIframe[0].getAttribute('timestamp'));
+						done();
+					}
+
+					count++;
+				});
+			});
+		});
+	</script>
+</body>
+</html>
