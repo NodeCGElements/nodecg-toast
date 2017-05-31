@@ -36,8 +36,7 @@
 	}
 
 	/**
-	 * `nodecg-widget-obs`
-	 * A NodeCG utility that provides a UI for configuring a connection to OBS via obs-websocket
+	 * `nodecg-toast`
 	 *
 	 * @customElement
 	 * @polymer

@@ -1,3 +1,35 @@
+<a name="1.0.0"></a>
+## [1.0.0](https://github.com/NodeCGElements/nodecg-toast/compare/v0.2.2...v1.0.0) (2017-05-31)
+
+This release ports `<nodecg-toast>` to Polymer 2 and adds a new test suite with code coverage reporting.
+
+
+### Features
+
+* The following methods are now forwarded from `<nodecg-toast>` to its corresponding `<paper-toast>`. Calling any of these methods on `<nodecg-toast>` will result in that method being called on the `<paper-toast>` with the same arguments:
+  - `assignParentResizable`
+  - `cancel`
+  - `center`
+  - `close`
+  - `constrain`
+  - `fit`
+  - `hide`
+  - `invalidateTabbables`
+  - `notifyResize`
+  - `open`
+  - `position`
+  - `refit`
+  - `resetFit`
+  - `resizerShouldNotify`
+  - `show`
+  - `stopResizeNotificationsFor`
+  - `toggle`
+  
+
+### BREAKING CHANGES
+* `<nodecg-toast>` has been ported to Polymer 2, and will no longer function on Polymer 1.
+
+
 <a name="0.2.2"></a>
 ## [0.2.2](https://github.com/NodeCGElements/nodecg-toast/compare/v0.2.1...v0.2.2) (2017-05-12)
 
