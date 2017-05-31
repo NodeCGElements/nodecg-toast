@@ -1,9 +1,9 @@
-# nodecg-toast 
-[![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/NodeCGElemements/nodecg-toast)
+# \<nodecg-toast\> [![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/NodeCGElemements/nodecg-toast) [![Build Status](https://travis-ci.org/NodeCGElements/nodecg-toast.svg?branch=master)](https://travis-ci.org/NodeCGElements/nodecg-toast) [![Coverage Status](https://coveralls.io/repos/github/NodeCGElements/nodecg-toast/badge.svg?branch=master)](https://coveralls.io/github/NodeCGElements/nodecg-toast?branch=master) ![Polymer 2 only](https://img.shields.io/badge/Polymer%202-only-blue.svg)
 
-An implementation of [paper-toast](https://www.webcomponents.org/element/PolymerElements/paper-toast) designed to work well in NodeCG dashboard panels.
 
-[Click here for docs & demo.](http://nodecgelements.github.io/nodecg-toast)
+An implementation of [paper-toast](https://www.webcomponents.org/element/PolymerElements/paper-toast) designed to work well in NodeCG dashboard panels. Requires Polymer 2.
+
+[Click here for docs & demo.](https://nodecgelements.github.io/nodecg-toast)
 
 ## Motivation
 NodeCG dashboard panels are iframes. Showing toasts inside these iframes

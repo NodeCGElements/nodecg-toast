@@ -1,5 +1,7 @@
 bower_components
 node_modules
+coverage
+.nyc_output
 
 # JetBrains IDEs (IntelliJ/WebStorm)
 /.idea/compiler.xml
