@@ -3,8 +3,6 @@
 
 An implementation of [paper-toast](https://www.webcomponents.org/element/PolymerElements/paper-toast) designed to work well in NodeCG dashboard panels. Requires Polymer 2.
 
-[Click here for docs & demo.](https://nodecgelements.github.io/nodecg-toast)
-
 ## Motivation
 NodeCG dashboard panels are iframes. Showing toasts inside these iframes
 isn't always the best way of notifying a user. `nodecg-toast` reaches outside
